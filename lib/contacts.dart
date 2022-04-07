@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_messenger/discussion.dart';
 import 'package:flutter_messenger/messenger.dart';
+import 'package:flutter_messenger/main.dart';
 import 'model/FirebaseUsers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -22,6 +23,15 @@ class contactState extends State<contact> {
       appBar: AppBar(
         title: const Text("Contacts"),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const MyHomePage(title: '');
+                }));
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20),

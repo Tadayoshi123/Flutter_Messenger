@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_messenger/functions/FirestoreHelper.dart';
+import 'package:flutter_messenger/main.dart';
 import 'package:flutter_messenger/model/FirebaseUsers.dart';
 
 class profil extends StatefulWidget {
@@ -76,6 +77,15 @@ class profilState extends State<profil> {
       appBar: AppBar(
         title: const Text("Mon Profil"),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const MyHomePage(title: '');
+                }));
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -113,7 +123,8 @@ class profilState extends State<profil> {
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: (myProfil.avatar == null)
-                          ? const NetworkImage("https://img.myloview.fr/stickers/default-avatar-profile-image-vector-social-media-user-icon-400-228654854.jpg")
+                          ? const NetworkImage(
+                              "https://img.myloview.fr/stickers/default-avatar-profile-image-vector-social-media-user-icon-400-228654854.jpg")
                           : NetworkImage(myProfil.avatar!))),
             ),
             onTap: () {
@@ -127,11 +138,21 @@ class profilState extends State<profil> {
             height: 20,
           ),
 
-          //Afficher le pseudonyme
-          Text(
-            "${myProfil.username}",
-            style: const TextStyle(fontSize: 20),
-          ),
+          //Username
+          TextField(
+              onChanged: (newUserName) {
+                setState(() {
+                  myProfil.username = newUserName;
+                });
+                Map<String, dynamic> map = {
+                  "USERNAME": newUserName,
+                };
+                FirestoreHelper().updateUser(myProfil.uid, map);
+              },
+              decoration: InputDecoration(
+                hintText: "Modifier votre pseudonyme",
+                labelText: "${myProfil.username}",
+              )),
         ],
       ),
     );

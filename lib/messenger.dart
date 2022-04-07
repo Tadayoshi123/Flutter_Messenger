@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_messenger/contacts.dart';
+import 'package:flutter_messenger/main.dart';
 import 'functions/FirestoreHelper.dart';
 import 'model/FirebaseUsers.dart';
 import 'widgets/profil.dart';
@@ -19,6 +20,15 @@ class messengerState extends State<messenger> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Discussions"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const MyHomePage(title: '');
+                }));
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
