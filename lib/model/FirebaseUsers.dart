@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseUsers {
   late String uid;
-  late String username;
+  String? username;
   late String mail;
   String? avatar;
+  List? contacts;
+
+  
 
   FirebaseUsers.vide();
 
@@ -14,5 +17,6 @@ class FirebaseUsers {
     username = map["USERNAME"];
     mail = map["MAIL"];
     avatar = map["AVATAR"];
+    contacts = map["CONTACTS"];
   }
 }

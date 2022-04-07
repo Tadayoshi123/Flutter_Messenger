@@ -70,9 +70,21 @@ class profilState extends State<profil> {
         });
   }
 
-  ///
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Mon Profil"),
+        centerTitle: true,
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(20),
+        child: bodyPage(),
+      ),
+    );
+  }
+
+  Widget bodyPage() {
     FirestoreHelper().getID().then((String identifiant) {
       setState(() {
         String monId = identifiant;
@@ -84,11 +96,7 @@ class profilState extends State<profil> {
       });
     });
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      color: Colors.white,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width / 2,
+    return Center(
       child: Column(
         children: [
           const SizedBox(
@@ -98,15 +106,14 @@ class profilState extends State<profil> {
 
           InkWell(
             child: Container(
-              height: 150,
-              width: 150,
+              height: 128,
+              width: 128,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: (myProfil.avatar == null)
-                          ? const NetworkImage(
-                              "https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg")
+                          ? const NetworkImage("https://img.myloview.fr/stickers/default-avatar-profile-image-vector-social-media-user-icon-400-228654854.jpg")
                           : NetworkImage(myProfil.avatar!))),
             ),
             onTap: () {
@@ -120,9 +127,11 @@ class profilState extends State<profil> {
             height: 20,
           ),
 
-          //TODO réussir à afficher le pseudonyme
           //Afficher le pseudonyme
-          Text(myProfil.username)
+          Text(
+            "${myProfil.username}",
+            style: const TextStyle(fontSize: 20),
+          ),
         ],
       ),
     );
