@@ -2,6 +2,8 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_messenger/contacts.dart';
 import 'package:flutter_messenger/model/FirebaseUsers.dart';
 
 class FirestoreHelper {
@@ -17,9 +19,14 @@ class FirestoreHelper {
         email: mail, password: password);
     User? user = result.user;
     String uid = user!.uid;
+    List contacts = [];
     Map<String, dynamic> values = {
       "USERNAME": username,
       "MAIL": mail,
+      "AVATAR":
+          "https://img.myloview.fr/stickers/default-avatar-profile-image-vector-social-media-user-icon-400-228654854.jpg",
+      //default avatar
+      "CONTACTS": contacts
     };
     addUser(uid, values);
   }
@@ -55,4 +62,9 @@ class FirestoreHelper {
     urlChemin = await snapshotTask.ref.getDownloadURL();
     return urlChemin!;
   }
+
+  // Faire les fonctions pour gérer l'ajoute des contacts dans la liste de contacts de l'utilisateur
+  // updateContacts(String uid, Map<String, dynamic> map) {
+  //   fire_user.add(map);
+  // }
 }

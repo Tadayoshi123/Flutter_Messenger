@@ -161,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           child: const Text(
             "Inscription",
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(color: Colors.teal),
           ),
         ),
       ],

@@ -100,7 +100,7 @@ class registerState extends State<register> {
           },
           child: const Text(
             "Connexion",
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(color: Colors.teal),
           ),
         ),
       ],

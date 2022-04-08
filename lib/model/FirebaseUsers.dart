@@ -5,13 +5,11 @@ class FirebaseUsers {
   String? username;
   late String mail;
   String? avatar;
-  List? contacts;
-
-  
+  List contacts = [];
 
   FirebaseUsers.vide();
 
-  FirebaseUsers(DocumentSnapshot snapshot){
+  FirebaseUsers(DocumentSnapshot snapshot) {
     Map<String, dynamic> map = snapshot.data() as Map<String, dynamic>;
     uid = snapshot.id;
     username = map["USERNAME"];

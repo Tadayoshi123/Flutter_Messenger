@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_messenger/functions/FirestoreHelper.dart';
 import 'package:flutter_messenger/main.dart';
 import 'package:flutter_messenger/model/FirebaseUsers.dart';
+import 'package:flutter_messenger/contacts.dart';
+import 'package:flutter_messenger/messenger.dart';
 
 class profil extends StatefulWidget {
   @override
@@ -21,7 +23,7 @@ class profilState extends State<profil> {
 
   //Function
 
-  //Récupérer l'image sur notre téléphone
+  //GetImage From Phone
   getImage() async {
     FilePickerResult? resultat = await FilePicker.platform
         .pickFiles(withData: true, type: FileType.image);
@@ -32,7 +34,7 @@ class profilState extends State<profil> {
     }
   }
 
-  //Afficher l'image choisie
+  //Display chosen image
   popImage() {
     showDialog(
         context: context,
@@ -87,6 +89,36 @@ class profilState extends State<profil> {
               icon: const Icon(Icons.logout))
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+            icon: IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return messenger();
+                  }));
+                },
+                icon: const Icon(Icons.messenger)),
+            label: "Discussions"),
+        BottomNavigationBarItem(
+          icon: IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return profil();
+                }));
+              },
+              icon: const Icon(Icons.person)),
+          label: "Mon Profil",
+        ),
+        BottomNavigationBarItem(
+            icon: IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return contact();
+                  }));
+                },
+                icon: const Icon(Icons.people)),
+            label: "Mes contacts")
+      ], currentIndex: 1),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: bodyPage(),
